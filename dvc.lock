@@ -1,0 +1,14 @@
+schema: '2.0'
+stages:
+  training:
+    cmd: python src/components/data_ingestion.py
+    deps:
+    - path: src/components/data_ingestion.py
+      hash: md5
+      md5: ad48b9fc0b78aa7ecadce0fbc4d57e5a
+      size: 1836
+    outs:
+    - path: artifacts/hotel_reviews.csv
+      hash: md5
+      md5: 7bd302a3626c55f38516f92546556c4a
+      size: 14992468
