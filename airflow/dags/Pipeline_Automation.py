@@ -36,13 +36,7 @@ def Run_Data_transformation_pipeline(**kwargs):
 
 def Run_Model_trainer_pipeline(**kwargs):
     X_balanced = kwargs['ti'].xcom_pull(key='X_balanced')
-    y_balanced = kwargs['ti'].xcom_pull(key='y_balanced')
-
-    physical_devices = tf.config.list_physical_devices('GPU')
-    if physical_devices:
-        tf.config.experimental.set_memory_growth(physical_devices[0], True)
-        print("GPU is available, configuring TensorFlow to use it.")
-    
+    y_balanced = kwargs['ti'].xcom_pull(key='y_balanced') 
     model_trainer = ModelTrainer()
     X_test, y_test = model_trainer.train_model(X_balanced, y_balanced)
     kwargs['ti'].xcom_push(key='X_test', value=X_test.tolist())  # Convert to list
