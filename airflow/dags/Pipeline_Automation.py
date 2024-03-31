@@ -39,8 +39,8 @@ def Run_Model_trainer_pipeline(**kwargs):
     y_balanced = kwargs['ti'].xcom_pull(key='y_balanced') 
     model_trainer = ModelTrainer()
     X_test, y_test = model_trainer.train_model(X_balanced, y_balanced)
-    kwargs['ti'].xcom_push(key='X_test', value=X_test.tolist())  # Convert to list
-    kwargs['ti'].xcom_push(key='y_test', value=y_test.tolist())
+    kwargs['ti'].xcom_push(key='X_test', value=X_test)  # Convert to list
+    kwargs['ti'].xcom_push(key='y_test', value=y_test)
 
 
 def Run_Model_evaluation_pipeline(**kwargs):

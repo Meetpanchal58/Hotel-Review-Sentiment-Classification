@@ -11,12 +11,11 @@ services:
     ports:
       - "8080:8080"
 
-    
-#  streamlitapp:
-#    build:
-#      context: ./
-#      dockerfile: Dockerfile.streamlit
-#    image: streamlitimage
-#    container_name: Hotel-Review-Sentiment-Classification-streamlit
-#    ports:
-#      - "8051:8051"
+  streamlitapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile.streamlit
+    image: streamlitimage
+    container_name: Hotel-Review-Sentiment-Classification-streamlit
+    ports:
+      - "8051:8051"
