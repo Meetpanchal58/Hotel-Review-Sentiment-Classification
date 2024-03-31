@@ -1,10 +1,7 @@
 stages:
   training:
-    cmd: python src/pipeline/Complete_Pipeline.py
+    cmd: python src/components/data_ingestion.py
     deps:
       - src/components/data_ingestion.py
-      - src/components/data_transformation.py
-      - src/components/model_trainer.py
-      - src/components/model_evaluation.py
     outs:
       - artifacts/hotel_reviews.csv

@@ -1,0 +1,16 @@
+artifact_uri: file:///C:/Users/meetp/Downloads/!PYTHON FILES/Hotel Review Sentiment
+  Classification/mlruns/0/cadee0b82e2c435b9c61de7795dd4987/artifacts
+end_time: 1711808983735
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: cadee0b82e2c435b9c61de7795dd4987
+run_name: Model Evaluation
+run_uuid: cadee0b82e2c435b9c61de7795dd4987
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1711808945671
+status: 3
+tags: []
+user_id: 3a65e3bfcd2705460890ab7da31211df0124f07c

@@ -8,7 +8,6 @@ from keras.models import Sequential
 from keras.layers import Embedding, GRU, Dense, Dropout,SpatialDropout1D
 from keras.optimizers import Adam
 from keras.callbacks import EarlyStopping
-from src.components.data_tranformation import DataTransformation
 from src.exception.exception import CustomException
 
 

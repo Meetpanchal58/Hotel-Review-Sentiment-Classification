@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  airflow:
+    build:
+      context: ./
+      dockerfile: Dockerfile.airflow
+    environment:
+      AZURE_ACCESS_KEY: ${AZURE_CONNECTION_STRING}
+    image: airflowimage
+    container_name: Hotel-Review-Sentiment-Classification-airflow
+    ports:
+      - "8081:8081"
+
+    
+#  streamlitapp:
+#    build:
+#      context: ./
+#      dockerfile: Dockerfile.streamlit
+#    image: streamlitimage
+#    container_name: Hotel-Review-Sentiment-Classification-streamlit
+#    ports:
+#      - "8051:8051"
