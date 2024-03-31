@@ -20,10 +20,10 @@ class ModelTrainer:
     def __init__(self):
         self.model_trainer_config=ModelTrainerConfig()
 
-    def train_model(self, X_balanced, y_balanced):
-        logging.info("Model training started")
-        
+    def train_model(self, X_balanced, y_balanced):  
         try:
+            logging.info("Model training started")
+
             X_train, X_test, y_train, y_test = train_test_split(X_balanced, y_balanced, test_size=0.2, random_state=42, stratify = y_balanced)
 
             #tf.random.set_seed(1)
@@ -39,7 +39,7 @@ class ModelTrainer:
             optimizer = Adam(learning_rate=0.01)
             gru.compile(loss='sparse_categorical_crossentropy', metrics=['accuracy'], optimizer = optimizer)
 
-            early_stopping = EarlyStopping(monitor='val_loss', patience=2, restore_best_weights=True)
+            early_stopping = EarlyStopping(monitor='val_loss', patience=2, restore_best_weights=True)     
             gru.fit(X_train, y_train, epochs=2, batch_size=128, validation_data=(X_test, y_test), callbacks = [early_stopping])
 
             save_GRU(
@@ -48,7 +48,7 @@ class ModelTrainer:
             )
 
             logging.info("Model training completed")
-            return gru, X_test, y_test
+            return X_test, y_test
 
         except Exception as e:
             logging.exception("An error occurred during model training")

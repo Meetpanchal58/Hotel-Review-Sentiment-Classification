@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 import subprocess
 import pendulum
+import tensorflow as tf
 from src.components.data_ingestion import DataIngestion
 from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer 
@@ -12,7 +13,7 @@ with DAG(
     default_args={"retries": 2},
     description="this is Complete NLP Pipeline",
     schedule="@weekly",# here you can test based on hour or mints but make sure here you container is up and running
-    start_date=pendulum.datetime(2024, 4, 1, tz="UTC"),
+    start_date=pendulum.datetime(2024, 3, 31, tz="UTC"),
     catchup=False,
     tags=["NLP","Deep Learning","Multi_Text_Classification"],
 ) as dag:
@@ -30,26 +31,29 @@ def Run_Data_transformation_pipeline(**kwargs):
     df = kwargs['ti'].xcom_pull(key='raw_df')
     data_transformation = DataTransformation()
     X_balanced, y_balanced = data_transformation.transform(df)
-    kwargs['ti'].xcom_push(key='X_balanced', value=X_balanced)
-    kwargs['ti'].xcom_push(key='y_balanced', value=y_balanced)
-
+    kwargs['ti'].xcom_push(key='X_balanced', value=X_balanced.tolist())  # Convert to list
+    kwargs['ti'].xcom_push(key='y_balanced', value=y_balanced.tolist())  # Convert to list
 
 def Run_Model_trainer_pipeline(**kwargs):
     X_balanced = kwargs['ti'].xcom_pull(key='X_balanced')
     y_balanced = kwargs['ti'].xcom_pull(key='y_balanced')
+
+    physical_devices = tf.config.list_physical_devices('GPU')
+    if physical_devices:
+        tf.config.experimental.set_memory_growth(physical_devices[0], True)
+        print("GPU is available, configuring TensorFlow to use it.")
+    
     model_trainer = ModelTrainer()
-    gru, X_test, y_test = model_trainer.train_model(X_balanced, y_balanced)
-    kwargs['ti'].xcom_push(key='gru_model', value=gru)
-    kwargs['ti'].xcom_push(key='X_test', value=X_test)
-    kwargs['ti'].xcom_push(key='y_test', value=y_test)
+    X_test, y_test = model_trainer.train_model(X_balanced, y_balanced)
+    kwargs['ti'].xcom_push(key='X_test', value=X_test.tolist())  # Convert to list
+    kwargs['ti'].xcom_push(key='y_test', value=y_test.tolist())
 
 
 def Run_Model_evaluation_pipeline(**kwargs):
-    gru_model = kwargs['ti'].xcom_pull(key='gru_model')
     X_test = kwargs['ti'].xcom_pull(key='X_test')
     y_test = kwargs['ti'].xcom_pull(key='y_test')
     model_evaluation = ModelEvaluation()
-    model_evaluation.evaluate_model(gru_model, X_test, y_test)
+    model_evaluation.evaluate_model(X_test, y_test)
 
 
 def push_to_AzureBlob():

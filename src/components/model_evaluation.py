@@ -6,6 +6,7 @@ import mlflow.sklearn
 from mlflow import log_metric, log_param
 from src.logger.logging import logging
 from sklearn.metrics import confusion_matrix, classification_report
+from src.utils.utils import load_GRU
 from src.exception.exception import CustomException
 
 
@@ -13,7 +14,7 @@ class ModelEvaluation:
     def __init__(self):
         pass
 
-    def evaluate_model(self, gru, X_test, y_test):
+    def evaluate_model(self, X_test, y_test):
         logging.info("Model evaluation started")
         
         try:
@@ -23,6 +24,8 @@ class ModelEvaluation:
 
             # Start MLflow run
             mlflow.start_run(run_name="Model Evaluation")
+
+            gru = load_GRU('artifacts/GRU_Model.h5')
 
             y_pred = np.argmax(gru.predict(X_test),axis = 1)
 

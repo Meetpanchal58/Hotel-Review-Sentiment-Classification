@@ -4,7 +4,9 @@ from dataclasses import dataclass
 from src.logger.logging import logging
 from src.utils.utils import save_object
 import nltk
-#nltk.download('stopwords')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('punkt')
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords

@@ -2,6 +2,8 @@ numpy
 pandas
 matplotlib
 seaborn
+ipykernel
+openpyxl
 scikit-learn
 imblearn
 nltk
@@ -11,5 +13,6 @@ mlflow
 dagshub
 dvc
 apache-airflow
+azure.storage.blob
 
 -e .

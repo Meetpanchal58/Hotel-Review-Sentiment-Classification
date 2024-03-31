@@ -23,10 +23,10 @@ class Training_Pipline:
             
             # Model training
             model_trainer = ModelTrainer()
-            gru, X_test, y_test = model_trainer.train_model(X_balanced, y_balanced)
+            X_test, y_test = model_trainer.train_model(X_balanced, y_balanced)
              
             model_evaluation = ModelEvaluation()
-            model_evaluation.evaluate_model(gru, X_test, y_test)
+            model_evaluation.evaluate_model(X_test, y_test)
         
             logging.info("Training Pipline run is completed successfully")
         
