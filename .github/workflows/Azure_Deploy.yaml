@@ -1,0 +1,54 @@
+name: Build and deploy container app to Azure Web App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Log in to registry
+        uses: docker/login-action@v2
+        with:
+          registry: https://meet58.azurecr.io/
+          username: ${{ secrets.AzureAppService_ContainerUsername_27caa021a67c4b44a31f1e67d67b9d4a }}
+          password: ${{ secrets.AzureAppService_ContainerPassword_2845acb739e848a5a726e223980d507e }}
+
+      - name: Build and push streamlit container image to registry
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_27caa021a67c4b44a31f1e67d67b9d4a }}/streamlitimage:${{ github.sha }}
+          file: ./Dockerfile.streamlit
+
+      - name: Build and push airflow container image to registry
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4d32e8a44d2541909b7ced57e206f15a }}/airflowimage:${{ github.sha }}
+          file: ./Dockerfile.airflow
+
+      - name: Deploy streamlit to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'Hotel-Review-Sentiment-Classification'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_7756f4e7d64d4bd7ac011282327ce227 }}
+          images: 'meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_27caa021a67c4b44a31f1e67d67b9d4a }}/streamlitimage:${{ github.sha }}'
+
+      - name: Deploy airflow to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'Pipeline-Automation-with-Airflow'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_7fa8fef1d4fd4df2a37b27eae9cd0d24 }}
+          images: 'meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4d32e8a44d2541909b7ced57e206f15a }}/airflowimage:${{ github.sha }}'
