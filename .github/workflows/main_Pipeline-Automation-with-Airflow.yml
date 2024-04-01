@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_4d32e8a44d2541909b7ced57e206f15a }}/airflowimage:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./Dockerfile.airflow
 
   deploy:
     runs-on: ubuntu-latest
