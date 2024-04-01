@@ -30,7 +30,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: true
-        tags: meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a172c837787c42daae722e2733c999dd }}/Final_App:${{ github.sha }}
+        tags: meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a172c837787c42daae722e2733c999dd }}/finalapp:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -48,4 +48,4 @@ jobs:
         app-name: 'Hotel-Review-Sentiment-Classification'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_20a76fc10f364f34a6cabf1d70173cd7 }}
-        images: 'meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a172c837787c42daae722e2733c999dd }}/Final_App:${{ github.sha }}'
+        images: 'meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_a172c837787c42daae722e2733c999dd }}/finalapp:${{ github.sha }}'
