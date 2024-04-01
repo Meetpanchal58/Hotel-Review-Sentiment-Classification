@@ -31,7 +31,7 @@ jobs:
       with:
         push: true
         tags: meet58.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_27caa021a67c4b44a31f1e67d67b9d4a }}/streamlitimage:${{ github.sha }}
-        file: ./Dockerfile
+        file: ./Dockerfile.streamlit
 
   deploy:
     runs-on: ubuntu-latest
