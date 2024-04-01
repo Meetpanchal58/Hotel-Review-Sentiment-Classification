@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile.airflow
     environment:
       AZURE_CONNECTION_STRING: ${AZURE_CONNECTION_STRING}
-    image: airflowimage
+    image: meet58.azurecr.io/airflowimage
     container_name: Hotel-Review-Sentiment-Classification-airflow
     ports:
       - "8080:8080"
@@ -15,7 +15,7 @@ services:
     build:
       context: ./
       dockerfile: Dockerfile.streamlit
-    image: streamlitimage
+    image: meet58.azurecr.io/streamlitimage
     container_name: Hotel-Review-Sentiment-Classification-streamlit
     ports:
       - "8051:8051"
