@@ -13,17 +13,17 @@
 - We developed a deep learning model using GRU (Gated Recurrent Unit) architecture, achieving an accuracy of over 87% in sentiment prediction across ratings. The model enables precise classification of reviews into positive, negative, or neutral sentiments, facilitating informed decision-making for hotel management.
 
 ### Tech Stack
-TensorFlow
-NLTK
-GRU (Gated Recurrent Unit)
-DVC (Data Version Control)
-MLFlow-Dagshub (Experiment Tracking)
-Docker
-Airflow
-Github Actions CI/CD
-Azure Blob Storage
-Azure Web App
-Streamlit Cloud
+- TensorFlow
+- NLTK
+- GRU (Gated Recurrent Unit)
+- DVC (Data Version Control)
+- MLFlow-Dagshub (Experiment Tracking)
+- Docker
+- Airflow
+- Github Actions CI/CD
+- Azure Blob Storage
+- Azure Web App
+- Streamlit Cloud
 
 
 MLFLOW_TRACKING_URI=https://dagshub.com/Meetpanchal58/Hotel-Review-Sentiment-Classification.mlflow
