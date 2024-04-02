@@ -18,8 +18,8 @@
 - GRU (Gated Recurrent Unit)
 - DVC (Data Version Control)
 - MLFlow-Dagshub (Experiment Tracking)
-- Docker
-- Airflow
+- Docker (Product Containerization )
+- Airflow (Pipeline Orchestation )
 - Github Actions CI/CD
 - Azure Blob Storage
 - Azure Web App
