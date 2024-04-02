@@ -1,4 +1,4 @@
-## Hotel Review Sentiment Classification
+# Hotel Review Sentiment Classification
 
 ### Overview
 - This project aims to classify hotel reviews into positive, negative, or neutral sentiments using deep learning techniques. The model predicts the sentiment of each review based on the review text and associated rating.
@@ -18,15 +18,12 @@
 - GRU (Gated Recurrent Unit)
 - DVC (Data Version Control)
 - MLFlow-Dagshub (Experiment Tracking)
-- Docker (Product Containerization )
-- Airflow (Pipeline Orchestation )
+- Docker (Product Containerization)
+- Airflow (Pipeline Orchestation)
 - Github Actions CI/CD
-- Azure Blob Storage
+- Azure Blob (Data Storage)
 - Azure Web App
 - Streamlit Cloud
 
-
-MLFLOW_TRACKING_URI=https://dagshub.com/Meetpanchal58/Hotel-Review-Sentiment-Classification.mlflow
-python src/pipeline/Complete_Pipeline.py
-
-Deployment - https://hotel-review-sentiment-classification.streamlit.app/
+### Deployment
+Live - https://hotel-review-sentiment-classification.streamlit.app/
